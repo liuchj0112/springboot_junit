@@ -3,6 +3,7 @@ package com.springboot.junit.service;
 import com.springboot.junit.pojo.User;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,19 @@ import java.util.List;
 @Service
 public class UserService {
 
+    private User user;
 
-    public User getOne(){
-        return  new User(12,"tom",18,1);
+    @PostConstruct
+    public void init(){
+        user=new User(12,"tom",18,1);
+    }
+
+
+    public User getOne(Integer id){
+        if(id==12){
+            return user;
+        }
+        return  null;
     }
 
     public List<User> getAll(){
