@@ -3,6 +3,7 @@ package com.springboot.junit.controller;
 import com.springboot.junit.pojo.User;
 import com.springboot.junit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +25,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/getUser")
-    public User getUser(){
-        User user = userService.getOne();
+    @RequestMapping("/getUser/{id}")
+    public User getUser(@PathVariable(value = "id") Integer id){
+        User user = userService.getOne(id);
         return user;
     }
 
@@ -34,6 +35,11 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.getAll();
 
+    }
+
+
+    public String returnVal(String param1, String param2) {
+        return param1 + param2;
     }
 
 
